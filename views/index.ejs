@@ -1,58 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title><%= title %></title>
-  <!--CSS section-->
-  <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.min.css" />
-  <link rel="stylesheet" href="/@fortawesome/fontawesome-free/css/all.min.css" />
-  <link rel='stylesheet' href="/content/app.css" />
-</head>
-<body>
-  <!--Main Nav Bar-->
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="/">Lyudmila Zhurba Assignment 1</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-  
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav ml-auto">
+<%- include partials/header.ejs %> 
+<%- include partials/main_nav.ejs %> 
 
-        <li class="nav-item">
-          <a class="nav-link <% if(title == 'Home'){ %>active<% } %>" href="/home"> <i class="fa-solid fa-house"></i>Home</a>
-        </li>       
-        
-        <li class="nav-item">            
-          <a class="nav-link <% if(title == 'About'){ %>active<% } %>" href="/about"> <i class="fa-solid fa-circle-info"></i>About me</a>
-        </li> 
 
-        <li class="nav-item">
-          <a class="nav-link <% if(title == 'Projects'){ %>active<% } %>" href="/projects"> <i class="fa-solid fa-diagram-project"></i>Projects</a>
-        </li>
-        
-        <li class="nav-item">
-          <a class="nav-link <% if(title == 'Services'){ %>active<% } %>" href="/services"> <i class="fa-solid fa-computer"></i>Services</a>
-        </li> 
 
-        <li class="nav-item">
-          <a class="nav-link <% if(title == 'Contact'){ %>active<% } %>" href="/contact"> <i class="fa-solid fa-message"></i>Contact</a>
-        </li>
-      </ul>       
-    </div>
-  </nav>
+
   <main class="container">
     <div class="jumbotron">
-      <h1 class="display-4">Welcome to <%= title %> page</h1>      
+      <h1 class="display-4">Welcome to <%= title %> page</h1>  
+      <img src="/assets/images/ZhurbaLogo.png" width="25%" height="25%" alt="Logo">    
     </div>
   </main>
 
-  <!--Scripts section-->
-  <script src="/scripts/app.js"></script> 
-  <script src="/jquery/dist/jquery.min.js"></script>  
-  <script src="/bootstrap/dist/js/bootstrap.min.js"></script>
-</body>
-</html>
 
+<%- include partials/bottom_nav.ejs %> 
+  
+<%- include partials/footer.ejs %>
