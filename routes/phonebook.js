@@ -1,19 +1,18 @@
 let express = require('express');
 let router = express.Router();
-let phonebook = require('../models/phonebook');
+let controller = require('../configs/controllers/phonebookcontroller');
 
 //get a rout for contact page Read 
-router.get('/', (req, res, next) => {
-    phonebook.find((err, all) => {
-        if(err)
-        {
-            return console.error(err);
-        }
-        else
-        {
-            res.render('phonebook/list', { title: 'Phonebook', allContacts: all });
-        }
-    });
-});
+router.get('/', controller.listRecords);
+
+router.get('/add', controller.showAddRecord);
+
+router.post('/add', controller.addRecordToDatabase);
+
+router.get('/edit/:mongoid', controller.showEditRecord);
+
+router.post('/edit/:mongoid', controller.updateRecordInDatabase);
+
+router.get('/delete/:mongoid', controller.deleteRecordInDatabase);
 
 module.exports = router;

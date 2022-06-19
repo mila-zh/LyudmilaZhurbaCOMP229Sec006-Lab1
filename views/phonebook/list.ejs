@@ -12,15 +12,15 @@
         <div class="offset-md-1 col-md-11">
             <h1><%= title %></h1>
 
-            <% if(typeof displayName == 'string' && displayName) { %>
-                <a href="/phonebook/edit" class="btn btn-primary" role="button">
-                <i class="fas fa-plus-circle"></i> Add a Contact</a>
+            <% if(typeof username == 'string' && username) { %>
+                <a href="/phonebook/add" class="btn btn-primary" role="button">
+                <i class="fas fa-plus-circle"></i> Add Entry</a>
             <% } %>
             <br>
             <table class="table table-bordered table-striped table-hover">
                 <!-- Header Row-->
                 <tr class="">
-                    <% if(typeof displayName == 'string' && displayName) { %>
+                    <% if(typeof username == 'string' && username) { %>
                         <th class="text-center col-2">Name</th>
                         <th class="text-center col-2">Phone Number</th>
                         <th class="text-center col-4">Email</th>
@@ -37,7 +37,7 @@
                 <% for(let i = 0; i < allContacts.length; i++) { %>
                     <% let item = allContacts[i]; %>
                     <tr class="">
-                        <% if(typeof displayName == 'string' && displayName) { %>
+                        <% if(typeof username == 'string' && username) { %>
                             <td class="text-center col-2"><%= item.name %></td>
                             <td class="text-center col-2"><%= item.phone %></td>
                             <td class="text-center col-4"><%= item.email %></td>
