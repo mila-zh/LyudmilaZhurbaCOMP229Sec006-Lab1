@@ -1,4 +1,9 @@
 module.exports = 
 {
-    "URI": "mongodb://localhost/users_collection"
+    "URI": "mongodb://localhost/milas_database"
 }
+
+/*
+collections:
+- phonebook
+*/

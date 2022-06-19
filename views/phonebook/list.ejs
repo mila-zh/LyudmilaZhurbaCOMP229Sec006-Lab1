@@ -1,0 +1,68 @@
+<%- include ../partials/header.ejs %> 
+<%- include ../partials/main_nav.ejs %>
+<img src="/assets/images/ZhurbaLogo.png" width="20%" height="20%" alt="Logo">
+<!--Lyudmila Zhurba-->
+<!--301250531-->
+<!--June 1, 2022-->
+<!--About me page-->
+
+<!-- Main Content -->
+<main class="container">
+    <div class="row">
+        <div class="offset-md-1 col-md-11">
+            <h1><%= title %></h1>
+
+            <% if(typeof displayName == 'string' && displayName) { %>
+                <a href="/phonebook/edit" class="btn btn-primary" role="button">
+                <i class="fas fa-plus-circle"></i> Add a Contact</a>
+            <% } %>
+            <br>
+            <table class="table table-bordered table-striped table-hover">
+                <!-- Header Row-->
+                <tr class="">
+                    <% if(typeof displayName == 'string' && displayName) { %>
+                        <th class="text-center col-2">Name</th>
+                        <th class="text-center col-2">Phone Number</th>
+                        <th class="text-center col-4">Email</th>
+                        <th class="text-center col-1"></th>
+                        <th class="text-center col-1"></th>
+                    <% } else { %>
+                        <th class="text-center col-2">Name</th>
+                        <th class="text-center col-2">Phone Number</th>
+                        <th class="text-center col-4">Email</th>                      
+                    <% } %>
+                </tr>
+
+                <!-- table body -->
+                <% for(let i = 0; i < allContacts.length; i++) { %>
+                    <% let item = allContacts[i]; %>
+                    <tr class="">
+                        <% if(typeof displayName == 'string' && displayName) { %>
+                            <td class="text-center col-2"><%= item.name %></td>
+                            <td class="text-center col-2"><%= item.phone %></td>
+                            <td class="text-center col-4"><%= item.email %></td>
+                                    
+                            <td class="text-center col-1">
+                                <a href="/phonebook/edit/<%= item._id %>" class="btn btn-primary btn-sm">
+                                <i class="fas fa-pencil-alt"></i> Edit</a>
+                            </td>
+                            <td class="text-center col-1">
+                                <a href="/phonebook/delete/<%= item._id %>" class="btn btn-danger btn-sm">
+                                <i class="fas fa-trash-alt"></i> Delete</a>
+                            </td>
+
+                         <% } else { %>
+                            <td class="text-center col-2"><%= item.name %></td>
+                            <td class="text-center col-2"><%= item.phone %></td>
+                            <td class="text-center col-4"><%= item.email %></td>
+                         <% } %>
+                    </tr>
+                <% } %>
+            </table>
+        </div>
+    </div>
+  </main>
+  
+<!--including footer partials-->
+<%- include ../partials/bottom_nav.ejs %> 
+<%- include ../partials/footer.ejs %>
