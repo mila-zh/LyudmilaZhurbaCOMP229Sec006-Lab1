@@ -1,5 +1,7 @@
 let phonebook = require('../../models/phonebook');
 
+
+//List all the records
 module.exports.listRecords = function(req, res, next) {
     phonebook.find((err, all) => {
         if(err)
@@ -17,6 +19,7 @@ module.exports.showAddRecord = function(req, res, next) {
     res.render('phonebook/edit', { title: 'Add Phonebook Entry', entry: {} });
 };
 
+//add a new record to a DB
 module.exports.addRecordToDatabase = function(req, res, next) {
     let newEntry = new phonebook({
         name: req.body.name,
@@ -37,7 +40,7 @@ module.exports.addRecordToDatabase = function(req, res, next) {
     });
 };
 
-
+//Showing all the records
 module.exports.showEditRecord = function(req, res, next) {
     let id = req.params.mongoid;
     phonebook.findById(id, (err, record) => {
@@ -52,6 +55,7 @@ module.exports.showEditRecord = function(req, res, next) {
     });
 };
 
+//updating an existing record
 module.exports.updateRecordInDatabase = function(req, res, next) {
     let id = req.params.mongoid;
     let existingEntry = new phonebook({
@@ -74,6 +78,8 @@ module.exports.updateRecordInDatabase = function(req, res, next) {
     });
 };
 
+
+//Deleting selected record
 module.exports.deleteRecordInDatabase = function(req, res, entry){
     let id = req.params.mongoid;
     phonebook.remove({_id: id}, (err)=>
