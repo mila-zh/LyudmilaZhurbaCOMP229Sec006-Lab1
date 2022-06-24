@@ -1,6 +1,7 @@
 module.exports = 
 {
-    "URI": "mongodb://localhost/milas_database"
+    "URI": "mongodb://localhost/milas_database",
+    "Secret": "Secret"
 }
 
 /*

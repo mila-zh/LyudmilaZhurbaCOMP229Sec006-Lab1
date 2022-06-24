@@ -3,7 +3,7 @@ let phonebook = require('../../models/phonebook');
 
 //List all the records
 module.exports.listRecords = function(req, res, next) {
-    phonebook.find((err, all) => {
+    phonebook.find({}, null, {sort: {name: 1}}, (err, all) => {
         if(err)
         {
             return console.error(err);
