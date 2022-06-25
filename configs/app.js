@@ -1,4 +1,22 @@
-// ------------------------------- mongo db --------------------------------------
+// installed 3rd party packages
+let createError = require('http-errors');
+let express = require('express');
+let path = require('path');
+let cookieParser = require('cookie-parser');
+let logger = require('morgan');
+let cors = require('cors');
+
+// modules for authentication
+let session = require('express-session');
+let passport = require('passport');
+
+let passportJWT = require('passport-jwt');
+let JWTStrategy = passportJWT.Strategy;
+let ExtractJWT = passportJWT.ExtractJwt;
+
+let passportLocal = require('passport-local');
+let localStrategy = passportLocal.Strategy;
+let flash = require('connect-flash');
 
 // database setup
 let mongoose = require('mongoose');
@@ -13,14 +31,6 @@ mongoDB.once('open', ()=>{
   console.log('Connected to MongoDB...');
 });
 
-// --------------------- express server setup -------------------------------
-
-// instantiate express server
-let createError = require('http-errors');
-let express = require('express');
-let path = require('path');
-let cookieParser = require('cookie-parser');
-let logger = require('morgan');
 let indexRouter = require('../routes/index');
 let usersRouter = require('../routes/users');
 let phonebookRouter = require('../routes/phonebook');
@@ -37,40 +47,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '../public')));
 app.use(express.static(path.join(__dirname, '../node_modules')));
-
-// routes
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
-app.use('/phonebook', phonebookRouter);
-
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  next(createError(404));
-});
-
-// error handler
-app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error', { title: 'Error' });
-});
-
-// -------------------  auth  ------------------------
-
-// modules for authentication
-let session = require('express-session');
-let passport = require('passport');
-let passportJWT = require('passport-jwt');
-let passportLocal = require('passport-local');
-let flash = require('connect-flash');
-
-let JWTStrategy = passportJWT.Strategy;
-let ExtractJWT = passportJWT.ExtractJwt;
-let localStrategy = passportLocal.Strategy;
 
 //setup express session
 app.use(session({
@@ -115,5 +91,25 @@ let strategy = new JWTStrategy(jwtOptions, (jwt_payload, done) => {
 
 passport.use(strategy);
 
+// routing
+app.use('/', indexRouter);
+app.use('/users', usersRouter);
+app.use('/phonebook', phonebookRouter);
+
+// catch 404 and forward to error handler
+app.use(function(req, res, next) {
+  next(createError(404));
+});
+
+// error handler
+app.use(function(err, req, res, next) {
+  // set locals, only providing error in development
+  res.locals.message = err.message;
+  res.locals.error = req.app.get('env') === 'development' ? err : {};
+
+  // render the error page
+  res.status(err.status || 500);
+  res.render('error', { title: 'Error'});
+});
 
 module.exports = app;

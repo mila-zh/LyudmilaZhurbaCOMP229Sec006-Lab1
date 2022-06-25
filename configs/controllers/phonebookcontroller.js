@@ -10,13 +10,13 @@ module.exports.listRecords = function(req, res, next) {
         }
         else
         {
-            res.render('phonebook/list', { title: 'Phonebook', allContacts: all });
+            res.render('phonebook/list', { title: 'Phonebook', allContacts: all, username: req.user.username });
         }
     });
 };
 
 module.exports.showAddRecord = function(req, res, next) {
-    res.render('phonebook/edit', { title: 'Add Phonebook Entry', entry: {} });
+    res.render('phonebook/edit', { title: 'Add Phonebook Entry', entry: {}, username: req.user.username });
 };
 
 //add a new record to a DB
@@ -50,7 +50,7 @@ module.exports.showEditRecord = function(req, res, next) {
         }
         else
         {
-            res.render('phonebook/edit', { title: 'Edit Phonebook Entry', entry: record });
+            res.render('phonebook/edit', { title: 'Edit Phonebook Entry', entry: record, username: req.user.username });
         }
     });
 };
